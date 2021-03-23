@@ -15,6 +15,8 @@ class md_config {
         int predict_flow_num;
         int packet_num_pre_flow;
         int packet_length;
+        int output_1D;
+        int output_2D;
         std::string customsize_input;
         std::string customsize_output;
         std::string input_op_name;
@@ -29,10 +31,6 @@ class md_config {
         md_config(std::string config_path);
     
     private:
-        std::string input_data_form;
-        std::string input_op;
-        std::string output_op;
-
         std::vector<std::string> split(std::string str, std::string separator);
         void get_session_config(std::string py_commad);
 };

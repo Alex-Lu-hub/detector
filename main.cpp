@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <detector.h>
 
 int main() {
@@ -8,13 +9,15 @@ int main() {
     int i = 0, j = 0;
     for(i = 0; i < 6; ++i) {
         for(j = 0; j < 100; ++j) {
-            test[i][j] = j;
+            test[i][j] = rand() % 256;
         }
     }
 
     for(i = 0; i < 1000; ++i) {
         detector_submit(detector, test, 6);
     }
+
+    detector_flush(detector);
 
     detector_fini(detector);
 

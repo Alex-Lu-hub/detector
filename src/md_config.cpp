@@ -21,11 +21,12 @@ md_config::md_config(string config_path) {
 
     model_path = config["model_path"].as<string>();
     source = config["source"].as<string>();
-    input_data_form = config["input_data_form"].as<string>();
+    string input_data_form = config["input_data_form"].as<string>();
+    string output_data_form = config["output_data_form"].as<string>();
     customsize_input = config["customsize_input"].as<string>();
     customsize_output = config["customsize_output"].as<string>();
-    input_op = config["input_op"].as<string>();
-    output_op = config["output_op"].as<string>();
+    string input_op = config["input_op"].as<string>();
+    string output_op = config["output_op"].as<string>();
     string py_path = config["tf_session_config"].as<string>();
     string py_bin = config["python_config"].as<string>();
     
@@ -43,6 +44,9 @@ md_config::md_config(string config_path) {
     predict_flow_num = stoi(split(input_data_form, "*")[0]);  //获得送入模型的矩阵维度1
     packet_num_pre_flow = stoi(split(input_data_form, "*")[1]);  //获得送入模型的矩阵维度2
     packet_length = stoi(split(input_data_form, "*")[2]);  //获得送入模型的矩阵维度3
+
+    output_1D = stoi(split(output_data_form, "*")[0]);  //获得模型输出的矩阵维度1
+    output_2D = stoi(split(output_data_form, "*")[1]);  //获得模型输出的矩阵维度2
 
     input_op_name = split(input_op, ":")[0];  //获得模型输入层op名
     input_op_idx = stoi(split(input_op, ":")[1]);  //获得模型输入层op编号

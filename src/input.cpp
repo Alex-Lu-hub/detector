@@ -54,11 +54,11 @@ bool input::isfull() {
 @retval None
 */
 void input::submit(void *packets, int packet_num) {
-    memcpy(TF_TensorData(input_tensor) + len * num_per_flow * p_len, packets, packet_num * p_len * sizeof(int64_t));
+    memcpy((static_cast<int64_t*>(TF_TensorData(input_tensor))) + len * num_per_flow * p_len, packets, packet_num * p_len * sizeof(int64_t));
     
     // 包数目不满每个流设置的数目时，用0补全
     if(packet_num < num_per_flow) {
-        memset(TF_TensorData(input_tensor) + (len * num_per_flow + packet_num) * p_len, 0, (num_per_flow - packet_num) * p_len * sizeof(int64_t));
+        memset((static_cast<int64_t*>(TF_TensorData(input_tensor))) + (len * num_per_flow + packet_num) * p_len, 0, (num_per_flow - packet_num) * p_len * sizeof(int64_t));
     }
     ++len;
 }
@@ -71,7 +71,7 @@ void input::submit(void *packets, int packet_num) {
 void input::flush() {
     // 流不足时，剩下的用0补全
     if(len < max) {
-        memset(TF_TensorData(input_tensor) + len * num_per_flow * p_len, 0, (max - len) * num_per_flow * p_len * sizeof(int64_t));
+        memset((static_cast<int64_t*>(TF_TensorData(input_tensor))) + len * num_per_flow * p_len, 0, (max - len) * num_per_flow * p_len * sizeof(int64_t));
     }
     len = 0;
 }

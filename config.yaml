@@ -1,5 +1,5 @@
 #Specify the location of the model model_path: The format example like '/home/user/test.pb'
-model_path: /home/lw/model.pb
+model_path: /home/lw/detector/model.pb
 
 #Specify the model input as online data or offline file source:
 #   Online traffic input needs to enter the network card name, the format example like 'eth0'
@@ -8,6 +8,9 @@ source: /home/user/test.pcap
 
 #Specify the model data input format input_data_form: The format example like '512*6*100'
 input_data_form: 512*6*100
+
+#Specify the model data output format output_data_form: The format example like '512*6'
+output_data_form: 512*6
 
 #Specify whether to use user-defined function customsize_input_data for data preprocessing: you can enter 'no' or a custom function class, 'no' is the default
 #Custom function requires the user to write a class in the project, and write the class name here, the format example like 'my_inputprocess'
@@ -21,6 +24,6 @@ input_op: input1:0
 
 output_op: activation_5/Softmax:0
 
-tf_session_config: /home/lw/model_deploy/test.py
+tf_session_config: /home/lw/detector/session_config.py
 
 python_config: /home/lw/venv/bin/python

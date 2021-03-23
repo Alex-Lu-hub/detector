@@ -60,7 +60,7 @@ void detector_submit(struct detector_t *api, void *packets, int packet_num) {
     // 如果已经需要预测，则进行预测
     if(api->myinput->isfull()) {
         const TF_Output input_op = TF_Output{TF_GraphOperationByName(api->model->graph, api->confinfo->input_op_name.c_str()), api->confinfo->input_op_idx};
-        api->myoutput->get_output(api->model->predict(&input_op, &(api->myinput->input_tensor), api->confinfo->output_op_name, api->confinfo->output_op_idx));
+        api->myoutput->get_output(api->model->predict(&input_op, &(api->myinput->input_tensor), api->confinfo->output_op_name, api->confinfo->output_op_idx), api->confinfo->output_1D, api->confinfo->output_2D);
     }
 }
 
@@ -72,7 +72,7 @@ void detector_submit(struct detector_t *api, void *packets, int packet_num) {
 void detector_flush(struct detector_t *api) {
     api->myinput->flush();
     const TF_Output input_op = TF_Output{TF_GraphOperationByName(api->model->graph, api->confinfo->input_op_name.c_str()), api->confinfo->input_op_idx};
-    api->myoutput->get_output(api->model->predict(&input_op, &(api->myinput->input_tensor), api->confinfo->output_op_name, api->confinfo->output_op_idx));
+    api->myoutput->get_output(api->model->predict(&input_op, &(api->myinput->input_tensor), api->confinfo->output_op_name, api->confinfo->output_op_idx), api->confinfo->output_1D, api->confinfo->output_2D);
 }
 
 /*
