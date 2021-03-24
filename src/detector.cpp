@@ -13,6 +13,7 @@ struct detector_t{
     tf_model* model;
     input* myinput;
     output* myoutput;
+    bool show_state;
 };
 
 /*
@@ -45,6 +46,7 @@ struct detector_t *detector_init(char *config) {
     api->model = model;
     api->myinput = myinput;
     api->myoutput = myoutput;
+    api->show_state = confinfo->show_state;
     return api;
 }
 
@@ -65,7 +67,7 @@ void detector_submit(struct detector_t *api, void *packets, int packet_num) {
 }
 
 /*
-@brief  洪范预测函数，直接进行预测
+@brief  洪泛预测函数，直接进行预测
 @param  api：检测结构指针
 @retval None
 */

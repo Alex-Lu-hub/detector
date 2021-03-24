@@ -26,6 +26,7 @@ class md_config {
         uint8_t *config;
         int config_len;
         bool use_session_config;
+        bool show_state;
 
         ~md_config();
         md_config(std::string config_path);

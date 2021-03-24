@@ -8,7 +8,9 @@ using namespace std;
 @retval None
 */
 md_config::~md_config() {
-    free(config);
+    if(use_session_config) {
+        free(config);
+    }
 }
 
 /*
@@ -29,6 +31,7 @@ md_config::md_config(string config_path) {
     string output_op = config["output_op"].as<string>();
     string py_path = config["tf_session_config"].as<string>();
     string py_bin = config["python_config"].as<string>();
+    show_state = config["show_state"].as<bool>();
     
     if(py_path == "default") {
         use_session_config = false;

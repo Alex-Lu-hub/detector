@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <detector.h>
+#include <sys/types.h>
 
 int main() {
     struct detector_t *detector = detector_init("../config.yaml");

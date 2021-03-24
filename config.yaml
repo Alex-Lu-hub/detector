@@ -1,5 +1,5 @@
 #Specify the location of the model model_path: The format example like '/home/user/test.pb'
-model_path: /home/lw/detector/model.pb
+model_path: ../model.pb
 
 #Specify the model input as online data or offline file source:
 #   Online traffic input needs to enter the network card name, the format example like 'eth0'
@@ -24,6 +24,8 @@ input_op: input1:0
 
 output_op: activation_5/Softmax:0
 
-tf_session_config: /home/lw/detector/session_config.py
+tf_session_config: ../session_config.py
 
 python_config: /home/lw/venv/bin/python
+
+show_state: true
