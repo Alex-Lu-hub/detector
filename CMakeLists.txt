@@ -37,3 +37,7 @@ install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/
 add_executable(main ${SRCS})    ## 生成可执行文件
 #设置 target 需要链接的库
 target_link_libraries(main detector)
+
+# using the following command to install benchmark library
+# apt install libbenchmark-dev
+add_subdirectory(bench)

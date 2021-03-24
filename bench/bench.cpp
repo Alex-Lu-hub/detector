@@ -3,7 +3,7 @@
 #include <detector.h>
 
 static void BM_detector(benchmark::State& state) {
-    struct detector_t *detector = detector_init("/home/lw/model_deploy/config.yaml");
+    struct detector_t *detector = detector_init("../config.yaml");
     int64_t test[6][100] = {1};
     detector_submit(detector, test, 6);
 
