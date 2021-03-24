@@ -28,4 +28,4 @@ tf_session_config: ../session_config.py
 
 python_config: /home/lw/venv/bin/python
 
-show_state: true
+show_state: false
