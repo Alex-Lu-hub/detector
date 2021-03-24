@@ -29,7 +29,7 @@ struct detector_t *detector_init(char *config) {
     md_config* confinfo = new md_config(config_path);
 
     // 构建模型类
-    tf_model* model = new tf_model();
+    tf_model* model = new tf_model(confinfo->show_state);
 
     // 如果模型加载失败，直接返回空指针
     if(!model->load(confinfo->model_path, confinfo->config, confinfo->config_len, confinfo->use_session_config)) {
@@ -40,7 +40,7 @@ struct detector_t *detector_init(char *config) {
     input* myinput = new input(model->graph, confinfo->input_op_name, confinfo->input_op_idx, confinfo->predict_flow_num, confinfo->packet_num_pre_flow, confinfo->packet_length);
 
     // 构建数据输出类
-    output* myoutput = new output();
+    output* myoutput = new output(confinfo->show_state);
     
     api->confinfo = confinfo;
     api->model = model;

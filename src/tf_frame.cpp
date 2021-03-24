@@ -3,6 +3,15 @@
 using namespace std;
 
 /*
+@brief  模型类构造函数
+@param  state：显示信息标志
+@retval None
+*/
+tf_model::tf_model(bool state) {
+    show_state = state;
+}
+
+/*
 @brief  模型类的析构函数，删掉构建的graph和session
 @param  None
 @retval None
@@ -14,13 +23,17 @@ tf_model::~tf_model() {
         if (TF_GetCode(status) != TF_OK) {
             TF_CloseSession(sess, status);
             TF_DeleteSession(sess, status);
-            cerr << TF_Message(status) << endl;
+            if(show_state) {
+                cerr << TF_Message(status) << endl;
+            }
             TF_DeleteStatus(status);
         }
     
         TF_DeleteSession(sess, status);
         if (TF_GetCode(status) != TF_OK) {
-            cerr << TF_Message(status) << endl;
+            if(show_state) {
+                cerr << TF_Message(status) << endl;
+            }
             TF_DeleteStatus(status);
         }
     
@@ -43,7 +56,9 @@ bool tf_model::load(string model_path, uint8_t *config, int config_len, bool use
     // 读取模型
     TF_Buffer* buffer = ReadBufferFromFile(model_path.c_str());
     if (buffer == nullptr) {
-        cerr << "Error creating the graph from the given model path " << model_path << " !" << endl;
+        if(show_state) {
+            cerr << "Error creating the graph from the given model path " << model_path << " !" << endl;
+        }
         return false;
     }
 
@@ -58,7 +73,9 @@ bool tf_model::load(string model_path, uint8_t *config, int config_len, bool use
     if (TF_GetCode(status) != TF_OK) {
         TF_DeleteGraph(graph);
         graph = nullptr;
-        cerr << TF_Message(status) << endl;
+        if(show_state) {
+            cerr << TF_Message(status) << endl;
+        }
         return false;
     }
     TF_DeleteStatus(status);
@@ -76,7 +93,9 @@ bool tf_model::load(string model_path, uint8_t *config, int config_len, bool use
     TF_DeleteSessionOptions(options);
 
     if (TF_GetCode(status) != TF_OK) {
-        cerr << TF_Message(status) << endl;
+        if(show_state) {
+            cerr << TF_Message(status) << endl;
+        }
         TF_DeleteStatus(status);
         return false;
     }
@@ -109,7 +128,9 @@ TF_Tensor* tf_model::predict(const TF_Output* input_op, TF_Tensor* const* input_
                   status // Output status.
     );
 
-    cout << TF_Message(status) << endl;
+    if(show_state) {
+        cout << TF_Message(status) << endl;
+    }
     
     if (TF_GetCode(status) != TF_OK) {
         return nullptr;

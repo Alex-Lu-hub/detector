@@ -3,6 +3,15 @@
 using namespace std;
 
 /*
+@brief  输出信息类构造函数
+@param  state：显示信息标志
+@retval None
+*/
+output::output(bool state) {
+    show_state = state;
+}
+
+/*
 @brief  输出预测信息
 @param  output_tensor：tensorflow预测后输出的tensor
 @param  output_1D：输出的矩阵第一个维度大小
@@ -24,11 +33,13 @@ void output::get_output(TF_Tensor* output_tensor, int output_1D, int output_2D) 
         }
         ++labelcount[label];
     }
-    cout << "result:" << endl <<
-    "|-->Normal:" << labelcount[0] << endl <<
-    "|-->Dewdrop:" << labelcount[1] << endl <<
-    "|-->Nopen:" << labelcount[2] << endl <<
-    "|-->Scaner:" << labelcount[3] << endl <<
-    "|-->SSH:" << labelcount[4] << endl <<
-    "|-->Telnet:" << labelcount[5] << endl;
+    if(show_state) {
+        cout << "result:" << endl <<
+        "|-->Normal:" << labelcount[0] << endl <<
+        "|-->Dewdrop:" << labelcount[1] << endl <<
+        "|-->Nopen:" << labelcount[2] << endl <<
+        "|-->Scaner:" << labelcount[3] << endl <<
+        "|-->SSH:" << labelcount[4] << endl <<
+        "|-->Telnet:" << labelcount[5] << endl;
+    }
 }
