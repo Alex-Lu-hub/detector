@@ -3,12 +3,22 @@
 using namespace std;
 
 /*
-@brief  输出信息类构造函数
+@brief  输出信息类构造函数，打开文件准备写入
 @param  state：显示信息标志
 @retval None
 */
 output::output(bool state) {
     show_state = state;
+    outfile.open("result.txt");
+}
+
+/*
+@brief  输出信息类析构函数，关闭文件
+@param  None
+@retval None
+*/
+output::~output() {
+    outfile.close();
 }
 
 /*
@@ -42,4 +52,11 @@ void output::get_output(TF_Tensor* output_tensor, int output_1D, int output_2D) 
         "|-->SSH:" << labelcount[4] << endl <<
         "|-->Telnet:" << labelcount[5] << endl;
     }
+    outfile << "result:" << endl <<
+        "|-->Normal:" << labelcount[0] << endl <<
+        "|-->Dewdrop:" << labelcount[1] << endl <<
+        "|-->Nopen:" << labelcount[2] << endl <<
+        "|-->Scaner:" << labelcount[3] << endl <<
+        "|-->SSH:" << labelcount[4] << endl <<
+        "|-->Telnet:" << labelcount[5] << endl;
 }
