@@ -1,5 +1,5 @@
 #include "detector.h"
-#include "md_config.h"
+#include "detector_config.h"
 #include "tf_frame.h"
 #include "input.h"
 #include "output.h"

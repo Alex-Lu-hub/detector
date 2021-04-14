@@ -1,5 +1,5 @@
 #Specify the location of the model model_path: The format example like '/home/user/test.pb'
-model_path: ../model.pb
+model_path: /home/lw/git/detector/model.pb
 
 #Specify the model input as online data or offline file source:
 #   Online traffic input needs to enter the network card name, the format example like 'eth0'
@@ -24,8 +24,13 @@ input_op: input1:0
 
 output_op: activation_5/Softmax:0
 
-tf_session_config: ../session_config.py
+tf_session_config: /home/lw/detector/session_config.py
 
 python_config: /home/lw/venv/bin/python
 
-show_state: false
+show_state: true
+
+#Must be a power of 2, the min is 32(even you set the size less than 32).
+tensor_queue_size: 65536
+
+predict_thread_num: 6

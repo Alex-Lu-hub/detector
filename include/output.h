@@ -1,18 +1,18 @@
-#ifndef DETECTOR_OUTPUT_H
-#define DETECTOR_OUTPUT_H
-#include <tensorflow/c/c_api.h>
-#include <iostream>
+#ifndef DETECTOR_OUTPUT_H_
+#define DETECTOR_OUTPUT_H_
 #include <fstream>
 
-class output {
-    public:
-        output(bool state);
-        ~output();
-        void get_output(TF_Tensor* output_tensor, int output_1D, int output_2D);
+#include <tensorflow/c/c_api.h>
 
-    private:
-        std::ofstream outfile;
-        bool show_state;
-        int labelcount[6] = {0};
+class Output {
+ public:
+  Output() {}
+  ~Output() {}
+  
+  void GetOutput(TF_Tensor *output_tensor, int output_1D, int output_2D, bool show_state);
+
+ private:
+  std::ofstream outfile_;
+  int labelcount_[6] = {0};
 };
-#endif
+#endif // DETECTOR_OUTPUT_H_

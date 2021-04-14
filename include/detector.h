@@ -1,16 +1,17 @@
-#ifndef DETECTOR_API_H
-#define DETECTOR_API_H
+#ifndef DETECTOR_DETECTOR_H_
+#define DETECTOR_DETECTOR_H_
 #ifdef __cplusplus
 extern "C" {
-#endif 
+#endif
 
-struct detector_t;
-struct detector_t *detector_init(char *config);
-void detector_submit(struct detector_t *api, void *packets, int packet_num);
-void detector_flush(struct detector_t *api);
-void detector_fini(struct detector_t *api);
+struct Detector;
+void Threadwork(struct Detector *api);
+struct Detector *DetectorInit(char *config_path);
+int DetectorSubmit(struct Detector *api, void *packets, int packet_num);
+int DetectorFlush(struct Detector *api);
+void DetectorFinish(struct Detector *api);
 
 #ifdef __cplusplus
 }
-#endif 
 #endif
+#endif // DETECTOR_DETECTOR_H_
